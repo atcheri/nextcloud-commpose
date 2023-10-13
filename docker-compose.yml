@@ -11,9 +11,8 @@ services:
     networks:
       - nextcloud_network
     volumes:
-      - db:/var/lib/mysql:Z
+      - db:/var/lib/mysql/data:Z
     environment:
-      - MYSQL_HOST=${MYSQL_HOST}
       - MYSQL_ROOT_PASSWORD:${MYSQL_ROOT_PASSWORD}
       - MYSQL_PASSWORD:${MYSQL_PASSWORD}
       - MYSQL_DATABASE:${MYSQL_DATABASE}
@@ -25,7 +24,7 @@ services:
     restart: always
     volumes:
       - db:/var/lib/postgresql/data:Z
-    env_file:
+    environment:
       - POSTGRES_PASSWORD:${POSTGRES_PASSWORD}
       - POSTGRES_DB=nextcloud
       - POSTGRES_USER=nextcloud
@@ -34,7 +33,7 @@ services:
     image: nextcloud:latest
     container_name: nextcloud-app
     ports:
-      - "8080:80"
+      - 8080:80
     networks:
       - nextcloud_network
     depends_on:

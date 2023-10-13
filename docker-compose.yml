@@ -49,6 +49,8 @@ services:
 
 volumes:
   nextcloud:
+    external: true
   db:
+    external: true
 networks:
   nextcloud_network:

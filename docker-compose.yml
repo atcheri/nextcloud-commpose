@@ -18,6 +18,16 @@ services:
       - MYSQL_DATABASE
       - MYSQL_USER
     restart: unless-stopped
+  
+  postgres:
+    image: postgres:alpine
+    restart: always
+    volumes:
+      - db:/var/lib/postgresql/data:Z
+    env_file:
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
 
   app:
     image: nextcloud:latest
@@ -30,7 +40,7 @@ services:
       - db
       - redis
     volumes:
-      - nextcloud:/var/www/html
+      - nextcloud:/var/www/html/data
     environment:
       - REDIS_HOST=redis
     restart: unless-stopped

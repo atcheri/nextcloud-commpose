@@ -34,7 +34,7 @@ services:
     image: nextcloud:latest
     container_name: nextcloud-app
     ports:
-      - 8080:80
+      - 8083:80
     networks:
       - nextcloud_network
     depends_on:

@@ -34,7 +34,7 @@ services:
     image: nextcloud:latest
     container_name: nextcloud-app
     ports:
-      - 8082:80
+      - 8081:80
     networks:
       - nextcloud_network
     depends_on:
@@ -44,7 +44,10 @@ services:
       - nextcloud:/var/www/html/data
     environment:
       - REDIS_HOST=redis
-      - MYSQL_HOST=db
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     restart: unless-stopped
 
 volumes:
